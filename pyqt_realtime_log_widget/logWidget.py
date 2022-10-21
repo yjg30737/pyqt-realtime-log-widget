@@ -47,6 +47,8 @@ class LogThread(QThread):
                 self.updated.emit(realtime_output.strip())
 
 class LogWidget(QWidget):
+    finished = pyqtSignal()
+
     def __init__(self, parent=None):
         super().__init__(parent)
         self.__parent = parent
@@ -94,6 +96,7 @@ class LogWidget(QWidget):
         self.__t.finished.connect(self.__handleButton)
         self.__t.started.connect(self.__logBrowser.show)
         self.__t.updated.connect(self.__logAppend)
+        self.__t.finished.connect(self.finished)
         self.__t.start()
 
     def __setDeletedFlag(self):
