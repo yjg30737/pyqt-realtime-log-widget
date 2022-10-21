@@ -83,7 +83,7 @@ class LogWidget(QWidget):
 
         self.setLayout(lay)
 
-    def setProcess(self, proc):
+    def setCommand(self, proc):
         self.__t = LogThread(proc)
         self.__t.finished.connect(self.__t.deleteLater)
         self.__t.finished.connect(self.__setDeletedFlag)
@@ -142,6 +142,6 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = LogWidget()
     proc = 'python example.py'
-    window.setProcess(proc)
+    window.setCommand(proc)
     window.show()
     sys.exit(app.exec())
