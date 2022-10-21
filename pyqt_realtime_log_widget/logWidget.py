@@ -94,7 +94,6 @@ class LogWidget(QWidget):
     def setCommand(self, command: str):
         self.__t = LogThread(command)
         self.__t.finished.connect(self.__t.deleteLater)
-        self.__t.finished.connect(self.__setDeletedFlag)
         self.__t.finished.connect(self.__handleButton)
         self.__t.started.connect(self.started)
         self.__t.started.connect(self.__handleButton)
@@ -102,9 +101,6 @@ class LogWidget(QWidget):
         self.__t.updated.connect(self.updated)
         self.__t.finished.connect(self.finished)
         self.__t.start()
-
-    def __setDeletedFlag(self):
-        self.__tDeleted = True
 
     def __stop(self):
         self.__pauseResumeBtn.setText('Pause')
@@ -116,8 +112,9 @@ class LogWidget(QWidget):
         vBar.setValue(vBar.maximum())
 
     def __handleButton(self):
-        self.__pauseResumeBtn.setEnabled(self.__t.isRunning())
-        self.__stopBtn.setEnabled(self.__t.isRunning())
+        self.__tDeleted = self.__t.isFinished()
+        self.__pauseResumeBtn.setDisabled(self.__tDeleted)
+        self.__stopBtn.setDisabled(self.__tDeleted)
 
     def __pauseResumeToggled(self):
         if self.__pauseResumeBtn.text() == 'Pause':
