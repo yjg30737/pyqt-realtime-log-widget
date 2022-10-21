@@ -1,0 +1,1 @@
+from pyqt_realtime_log_widget.main import LogWidget
