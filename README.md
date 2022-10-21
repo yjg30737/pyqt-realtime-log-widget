@@ -40,8 +40,8 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     window = LogWidget()
-    proc = 'python example.py'
-    window.setCommand(proc)
+    comm = 'python example.py'
+    window.setCommand(comm)
     window.show()
     sys.exit(app.exec())
 ```
