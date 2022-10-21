@@ -12,7 +12,7 @@ If you want to test or modify this (obviously) clone it.
 It has test code already so you can just run the logWidget.py.
 
 ## Method Overview
-* `setProcess(proc: str)` - set the command that you want to see the log in real time.
+* `setCommand(command: str)` - set the command that you want to see the log in real time.
 
 ## Feature
 * You can pause/resume/stop the command
@@ -41,7 +41,7 @@ if __name__ == '__main__':
     app = QApplication(sys.argv)
     window = LogWidget()
     proc = 'python example.py'
-    window.setProcess(proc)
+    window.setCommand(proc)
     window.show()
     sys.exit(app.exec())
 ```
