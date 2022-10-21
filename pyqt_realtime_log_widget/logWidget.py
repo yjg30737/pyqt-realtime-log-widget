@@ -47,8 +47,12 @@ class LogThread(QThread):
                 self.updated.emit(realtime_output.strip())
 
 class LogWidget(QWidget):
-    def __init__(self):
-        super().__init__()
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.__parent = parent
+        if self.__parent:
+            self.__parent.closeEvent = self.closeEvent
+
         self.__initVal()
         self.__initUi()
 
