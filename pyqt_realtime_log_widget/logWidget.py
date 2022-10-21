@@ -81,16 +81,16 @@ class LogWidget(QWidget):
         lay.addWidget(self.__logBrowser)
         lay.addWidget(bottomWidget)
 
-        command = 'python example.py'
-        self.__t = LogThread(command)
+        self.setLayout(lay)
+
+    def setProcess(self, proc):
+        self.__t = LogThread(proc)
         self.__t.finished.connect(self.__t.deleteLater)
         self.__t.finished.connect(self.__setDeletedFlag)
         self.__t.finished.connect(self.__handleButton)
         self.__t.started.connect(self.__logBrowser.show)
         self.__t.updated.connect(self.__logAppend)
         self.__t.start()
-
-        self.setLayout(lay)
 
     def __setDeletedFlag(self):
         self.__tDeleted = True
@@ -141,5 +141,7 @@ if __name__ == '__main__':
 
     app = QApplication(sys.argv)
     window = LogWidget()
+    proc = 'python example.py'
+    window.setProcess(proc)
     window.show()
     sys.exit(app.exec())
