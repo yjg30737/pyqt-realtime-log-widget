@@ -83,8 +83,8 @@ class LogWidget(QWidget):
 
         self.setLayout(lay)
 
-    def setCommand(self, proc):
-        self.__t = LogThread(proc)
+    def setCommand(self, command: str):
+        self.__t = LogThread(command)
         self.__t.finished.connect(self.__t.deleteLater)
         self.__t.finished.connect(self.__setDeletedFlag)
         self.__t.finished.connect(self.__handleButton)
