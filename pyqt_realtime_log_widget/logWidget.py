@@ -122,6 +122,7 @@ class LogWidget(QWidget):
             else:
                 self.__t.pause()
                 msgBox = QMessageBox()
+                msgBox.setWindowTitle('Warning')
                 msgBox.setText('Do you want to stop the process?')
                 msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
                 reply = msgBox.exec()
