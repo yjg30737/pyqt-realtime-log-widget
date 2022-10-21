@@ -11,7 +11,7 @@ Display log in real time with PyQt widget
 * `setProcess(proc: str)` - set the command that you want to see the log in real time.
 
 ## Feature
-* Pause/resume/stop the command
+* You can pause/resume/stop the command
 * Vertical scroll bar always at the bottom while log is displaying
 * Show the warning dialog when you try to close the widget. Process is suspended while warning dialog is showing. If you press Yes, process will be terminated and widget will be closed. If you press no, process will be keep running until it is finished.   
 
