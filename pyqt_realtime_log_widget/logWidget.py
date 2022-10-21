@@ -96,7 +96,6 @@ class LogWidget(QWidget):
         self.__t.finished.connect(self.__t.deleteLater)
         self.__t.finished.connect(self.__setDeletedFlag)
         self.__t.finished.connect(self.__handleButton)
-        self.__t.started.connect(self.__logBrowser.show)
         self.__t.started.connect(self.started)
         self.__t.updated.connect(self.__logAppend)
         self.__t.updated.connect(self.updated)
