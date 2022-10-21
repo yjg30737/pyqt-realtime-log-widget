@@ -13,11 +13,15 @@ It has test code already so you can just run the logWidget.py.
 
 ## Method Overview
 * `setCommand(command: str)` - set the command that you want to see the log in real time.
+* started - signal emitted after command being started.
+* updated(str) - signal emitted after log being updated. updated line as an argument.
+* finished - signal emitted after command being finished
 
 ## Feature
 * You can pause/resume/stop the command
 * Vertical scroll bar always at the bottom while log is displaying
-* Show the warning dialog when you try to close the widget. Process is suspended while warning dialog is showing. If you press Yes, process will be terminated and widget will be closed. If you press no, process will be keep running until it is finished.   
+* Show the warning dialog when you try to close the widget. Process is suspended while warning dialog is showing. If you press Yes, process will be terminated and widget will be closed. If you press no, process will be keep running until it is finished.
+* You can use the signal like started, updated, finished as i mentioned before.
 
 ## Example
 You need an example.py file. make it, write the code like below.
