@@ -7,7 +7,7 @@ Display log in real time with PyQt widget
 ## Install
 `python -m pip install git+https://github.com/yjg30737/pyqt-realtime-log-widget.git --upgrade`
 
-If you want to test or modify this (obviously) clone it.
+If you want to test or modify this, clone it.
 
 It has test code already so you can just run the logWidget.py.
 
