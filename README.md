@@ -20,6 +20,10 @@ It has test code already so you can just run the logWidget.py.
 * `updated(str)` - signal emitted after log being updated. updated line as an argument.
 * `stopped` - signal emitted after log being stopped.
 * `finished` - signal emitted after command being finished
+* `setStartText(start_text: str)` - set the text you want to add when process begins to execute
+* `setStopText(stop_text: str)` - set the text you want to add when process being stopped
+* `setFinishText(finish_text: str)` - text when process being finished
+* `getStartText`, `getStopText`, `getFinishText` are also provided.
 
 ## Feature
 * You can pause/resume/stop the command
