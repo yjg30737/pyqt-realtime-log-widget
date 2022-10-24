@@ -1,8 +1,11 @@
 # pyqt-realtime-log-widget
-Display log in real time with PyQt widget
+Display command log in real time with PyQt widget.
+
+This is using subprocess and psutil to execute/manuever the process, using QThread and a variety of signals defined by me to demonstrate process' log.
 
 ## Requirements
 * PyQt5
+* psutil
 
 ## Install
 `python -m pip install git+https://github.com/yjg30737/pyqt-realtime-log-widget.git --upgrade`
