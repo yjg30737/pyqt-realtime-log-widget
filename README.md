@@ -33,7 +33,7 @@ It has test code already so you can just run the logWidget.py.
 * Show the warning dialog when you try to close the widget, if you give the parent widget to the constructor such as `LogWidget(self)`. Process is suspended while warning dialog is showing. If you press Yes, process will be terminated and widget will be closed. If you press no, process will be keep running until it is finished.
 * You can use the signal like `started`, `updated`, `finished` as i mentioned before.
 
-## Example 
+## Example
 ### Example 1
 You need an example.py file. make it, write the code like below.
 
@@ -122,6 +122,26 @@ Run.
 
 https://user-images.githubusercontent.com/55078043/197147702-c1c86945-819d-40e6-ae4a-084146344eb9.mp4
 
+### Example 3 (LogDialog)
+```python
+from PyQt5.QtWidgets import QApplication
+from pyqt_realtime_log_widget import LogDialog
+//...
+
+if __name__ == '__main__':
+    import sys
+
+    app = QApplication(sys.argv)
+    dialog = LogDialog()
+    proc = 'python example.py'
+    dialog.setWindowTitle('Logging...')
+    logWidget = dialog.getLogWidget()
+    logWidget.setCommand(proc)
+    dialog.show()
+    sys.exit(app.exec())
+```
+
+Result? It's just a dialog version of LogWidget, so it is pointless to upload the image.
+
 ## Note
 Currently stop and finish signal is not well-distinguished. When process being stopped, finished event will be emitted as well, so it will be very confusing. I will fix it or how about you fix it for me?
-
