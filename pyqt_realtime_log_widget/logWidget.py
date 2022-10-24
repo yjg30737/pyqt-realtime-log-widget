@@ -8,6 +8,7 @@ from PyQt5.QtWidgets import QMessageBox, QTextBrowser, QVBoxLayout, QLabel, QWid
 
 class LogThread(QThread):
     updated = pyqtSignal(str)
+    stopped = pyqtSignal()
 
     def __init__(self, command, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -39,6 +40,7 @@ class LogThread(QThread):
         while True:
             if self.__stopped:
                 self.__stopped = False
+                self.stopped.emit()
                 return
             realtime_output = process.stdout.readline()
             if realtime_output == '' and process.poll() is not None:
@@ -49,6 +51,7 @@ class LogThread(QThread):
 class LogWidget(QWidget):
     started = pyqtSignal()
     updated = pyqtSignal(str)
+    stopped = pyqtSignal()
     finished = pyqtSignal()
 
     def __init__(self, parent=None):
@@ -68,6 +71,7 @@ class LogWidget(QWidget):
         # you can change the text with setStartText(start_text: str) and setFinishText(finish_text: str)
         self.__startText = 'Started!'
         self.__finishText = 'Finished!'
+        self.__stopText = 'Stopped!'
 
     def __initUi(self):
         self.setWindowTitle('Log')
@@ -105,6 +109,8 @@ class LogWidget(QWidget):
         self.__t.started.connect(self.__handleButton)
         self.__t.updated.connect(self.__logAppend)
         self.__t.updated.connect(self.updated)
+        self.__t.stopped.connect(self.stopped)
+        self.__t.stopped.connect(self.__appendStopText)
         self.__t.finished.connect(self.finished)
         self.__t.finished.connect(self.__appendFinishText)
         self.__t.start()
@@ -127,17 +133,26 @@ class LogWidget(QWidget):
     def __appendFinishText(self):
         self.__logBrowser.append(self.__finishText)
 
+    def __appendStopText(self):
+        self.__logBrowser.append(self.__stopText)
+
     def setStartText(self, start_text: str):
         self.__startText = start_text
 
     def setFinishText(self, finish_text: str):
         self.__finishText = finish_text
 
+    def setStopText(self, stop_text: str):
+        self.__stopText = stop_text
+
     def getStartText(self):
         return self.__startText
 
     def getFinishText(self):
         return self.__finishText
+
+    def getStopText(self):
+        return self.__stopText
 
     def __handleButton(self):
         self.__tDeleted = self.__t.isFinished()
