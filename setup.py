@@ -10,6 +10,7 @@ setup(
     description='Display log in real time with PyQt',
     url='https://github.com/yjg30737/pyqt-realtime-log-widget.git',
     install_requires=[
-        'PyQt5'
+        'PyQt5',
+        'psutil'
     ]
 )
