@@ -25,7 +25,7 @@ It has test code already so you can just run the logWidget.py.
     * `setStopText(stop_text: str)` - set the text you want to add when process being stopped
     * `setFinishText(finish_text: str)` - text when process being finished
     * `getStartText`, `getStopText`, `getFinishText` are also provided.
-* `LogDialog()` - Under Development
+* `LogDialog()` - Simply put, dialog version of LogWidget. Currently under development, just use `LogWidget`.
     * `getLogWidget()` - I believe this is self-explanatory.
 ## Feature
 * You can pause/resume/stop the command
