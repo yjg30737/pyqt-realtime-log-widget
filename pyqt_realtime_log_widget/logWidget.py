@@ -64,6 +64,11 @@ class LogWidget(QWidget):
         self.__t = ''
         self.__tDeleted = False
 
+        # each text below are appended when process is started and finished (by default)
+        # you can change the text with setStartText(start_text: str) and setFinishText(finish_text: str)
+        self.__startText = 'Started!'
+        self.__finishText = 'Finished!'
+
     def __initUi(self):
         self.setWindowTitle('Log')
 
@@ -96,20 +101,43 @@ class LogWidget(QWidget):
         self.__t.finished.connect(self.__t.deleteLater)
         self.__t.finished.connect(self.__handleButton)
         self.__t.started.connect(self.started)
+        self.__t.started.connect(self.__appendStartText)
         self.__t.started.connect(self.__handleButton)
         self.__t.updated.connect(self.__logAppend)
         self.__t.updated.connect(self.updated)
         self.__t.finished.connect(self.finished)
+        self.__t.finished.connect(self.__appendFinishText)
         self.__t.start()
 
     def __stop(self):
         self.__pauseResumeBtn.setText('Pause')
         self.__t.stop()
 
+    # append the text when process is started (one time)
+    def __appendStartText(self):
+        self.__logBrowser.append(self.__startText)
+
+    # append in general
     def __logAppend(self, text):
         self.__logBrowser.append(text)
         vBar = self.__logBrowser.verticalScrollBar()
         vBar.setValue(vBar.maximum())
+
+    # append the text when process is finished (one time)
+    def __appendFinishText(self):
+        self.__logBrowser.append(self.__finishText)
+
+    def setStartText(self, start_text: str):
+        self.__startText = start_text
+
+    def setFinishText(self, finish_text: str):
+        self.__finishText = finish_text
+
+    def getStartText(self):
+        return self.__startText
+
+    def getFinishText(self):
+        return self.__finishText
 
     def __handleButton(self):
         self.__tDeleted = self.__t.isFinished()
