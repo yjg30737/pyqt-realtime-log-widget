@@ -151,7 +151,6 @@ class LogDialog(QDialog):
         self.__initUi()
 
     def __initUi(self):
-        self.setWindowTitle('Logging...')
         self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
         self.__logWidget = LogWidget(self)
         lay = QGridLayout()
@@ -177,9 +176,10 @@ if __name__ == '__main__':
 #     import sys
 #
 #     app = QApplication(sys.argv)
-#     window = LogDialog()
+#     dialog = LogDialog()
 #     proc = 'python example.py'
-#     logWidget = window.getLogWidget()
+#     dialog.setWindowTitle('Logging...')
+#     logWidget = dialog.getLogWidget()
 #     logWidget.setCommand(proc)
-#     window.show()
+#     dialog.show()
 #     sys.exit(app.exec())
