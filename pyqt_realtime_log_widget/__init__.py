@@ -1,1 +1,1 @@
-from .logWidget import LogWidget
+from .logWidget import LogWidget, LogDialog

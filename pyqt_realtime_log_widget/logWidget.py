@@ -1,9 +1,9 @@
 import subprocess
 
 import psutil
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt5.QtCore import QThread, pyqtSignal, Qt
 from PyQt5.QtWidgets import QMessageBox, QTextBrowser, QVBoxLayout, QLabel, QWidget, QHBoxLayout, \
-    QPushButton, QSpacerItem, QSizePolicy, QApplication
+    QPushButton, QSpacerItem, QSizePolicy, QApplication, QDialog, QGridLayout
 
 
 class LogThread(QThread):
@@ -145,6 +145,22 @@ class LogWidget(QWidget):
         else:
             e.accept()
 
+class LogDialog(QDialog):
+    def __init__(self):
+        super().__init__()
+        self.__initUi()
+
+    def __initUi(self):
+        self.setWindowTitle('Logging...')
+        self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
+        self.__logWidget = LogWidget(self)
+        lay = QGridLayout()
+        lay.addWidget(self.__logWidget)
+        self.setLayout(lay)
+
+    def getLogWidget(self):
+        return self.__logWidget
+
 
 if __name__ == '__main__':
     import sys
@@ -155,3 +171,15 @@ if __name__ == '__main__':
     window.setCommand(proc)
     window.show()
     sys.exit(app.exec())
+
+# Log dialog example
+# if __name__ == '__main__':
+#     import sys
+#
+#     app = QApplication(sys.argv)
+#     window = LogDialog()
+#     proc = 'python example.py'
+#     logWidget = window.getLogWidget()
+#     logWidget.setCommand(proc)
+#     window.show()
+#     sys.exit(app.exec())
