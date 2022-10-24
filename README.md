@@ -14,17 +14,19 @@ If you want to test or modify this, clone it.
 
 It has test code already so you can just run the logWidget.py.
 
-## Method Overview
-* `setCommand(command: str)` - set the command that you want to see the log in real time.
-* `started` - signal emitted after command being started.
-* `updated(str)` - signal emitted after log being updated. updated line as an argument.
-* `stopped` - signal emitted after log being stopped.
-* `finished` - signal emitted after command being finished
-* `setStartText(start_text: str)` - set the text you want to add when process begins to execute
-* `setStopText(stop_text: str)` - set the text you want to add when process being stopped
-* `setFinishText(finish_text: str)` - text when process being finished
-* `getStartText`, `getStopText`, `getFinishText` are also provided.
-
+## Class/Method Overview
+* `LogWidget(parent=None)`
+    * `setCommand(command: str)` - set the command that you want to see the log in real time.
+    * `started` - signal emitted after command being started.
+    * `updated(str)` - signal emitted after log being updated. updated line as an argument.
+    * `stopped` - signal emitted after log being stopped.
+    * `finished` - signal emitted after command being finished
+    * `setStartText(start_text: str)` - set the text you want to add when process begins to execute
+    * `setStopText(stop_text: str)` - set the text you want to add when process being stopped
+    * `setFinishText(finish_text: str)` - text when process being finished
+    * `getStartText`, `getStopText`, `getFinishText` are also provided.
+* `LogDialog()` - Under Development
+    * `getLogWidget()` - I believe this is self-explanatory.
 ## Feature
 * You can pause/resume/stop the command
 * Vertical scroll bar always at the bottom while log is displaying
