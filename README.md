@@ -16,9 +16,10 @@ It has test code already so you can just run the logWidget.py.
 
 ## Method Overview
 * `setCommand(command: str)` - set the command that you want to see the log in real time.
-* started - signal emitted after command being started.
-* updated(str) - signal emitted after log being updated. updated line as an argument.
-* finished - signal emitted after command being finished
+* `started` - signal emitted after command being started.
+* `updated(str)` - signal emitted after log being updated. updated line as an argument.
+* `stopped` - signal emitted after log being stopped.
+* `finished` - signal emitted after command being finished
 
 ## Feature
 * You can pause/resume/stop the command
@@ -115,7 +116,6 @@ Run.
 
 https://user-images.githubusercontent.com/55078043/197147702-c1c86945-819d-40e6-ae4a-084146344eb9.mp4
 
-
-
-
+## Note
+Currently stop and finish signal is not well-distinguished. When process being stopped, finished event will be emitted as well, so it will be very confusing. I will fix it or how about you fix it for me?
 
