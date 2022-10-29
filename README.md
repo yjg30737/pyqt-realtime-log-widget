@@ -8,7 +8,7 @@ This is using subprocess and psutil to execute/manuever the process, using QThre
 * psutil
 
 ## Install
-`python -m pip install git+https://github.com/yjg30737/pyqt-realtime-log-widget.git --upgrade`
+`python -m pip install pyqt-realtime-log-widget --upgrade`
 
 If you want to test or modify this, clone it.
 
