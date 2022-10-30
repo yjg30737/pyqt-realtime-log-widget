@@ -48,6 +48,7 @@ class LogThread(QThread):
             if realtime_output:
                 self.updated.emit(realtime_output.strip())
 
+
 class LogWidget(QWidget):
     started = pyqtSignal()
     updated = pyqtSignal(str)
@@ -94,7 +95,6 @@ class LogWidget(QWidget):
         bottomWidget.setLayout(lay)
 
         lay = QVBoxLayout()
-        lay.addWidget(QLabel('Log'))
         lay.addWidget(self.__logBrowser)
         lay.addWidget(bottomWidget)
 
