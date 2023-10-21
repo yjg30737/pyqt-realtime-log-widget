@@ -28,7 +28,7 @@ class LogThread(QThread):
 
     def run(self):
         process = subprocess.Popen(
-            self.__command,
+            self.__command.split(),
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             text=True,
@@ -55,11 +55,13 @@ class LogWidget(QWidget):
     stopped = pyqtSignal()
     finished = pyqtSignal()
 
-    def __init__(self, parent=None):
+    def __init__(self, parent=None, warn_before_close=True):
         super().__init__(parent)
         self.__parent = parent
         if self.__parent:
             self.__parent.closeEvent = self.closeEvent
+
+        self.warn_before_close = warn_before_close
 
         self.__initVal()
         self.__initUi()
@@ -173,11 +175,15 @@ class LogWidget(QWidget):
                 e.accept()
             else:
                 self.__t.pause()
-                msgBox = QMessageBox()
-                msgBox.setWindowTitle('Warning')
-                msgBox.setText('Do you want to stop the process?')
-                msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
-                reply = msgBox.exec()
+
+                reply = QMessageBox.Yes
+                if (self.warn_before_close):
+                    msgBox = QMessageBox()
+                    msgBox.setWindowTitle('Warning')
+                    msgBox.setText('Do you want to stop the process?')
+                    msgBox.setStandardButtons(QMessageBox.Yes | QMessageBox.No)
+                    reply = msgBox.exec()
+
                 if reply == QMessageBox.Yes:
                     self.__t.stop()
                     # give the time to stop the process
