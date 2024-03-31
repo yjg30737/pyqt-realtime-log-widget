@@ -55,14 +55,15 @@ class LogWidget(QWidget):
     stopped = pyqtSignal()
     finished = pyqtSignal()
 
-    def __init__(self, parent=None, warn_before_close=True):
+    def __init__(self, parent=None, warn_before_close=True, show_buttons = True):
         super().__init__(parent)
         self.__parent = parent
         if self.__parent:
             self.__parent.closeEvent = self.closeEvent
 
         self.warn_before_close = warn_before_close
-
+        self.show_buttons = show_buttons
+        
         self.__initVal()
         self.__initUi()
 
@@ -86,18 +87,22 @@ class LogWidget(QWidget):
 
         self.__stopBtn = QPushButton('Stop')
         self.__stopBtn.clicked.connect(self.__stop)
-
+    
         lay = QHBoxLayout()
+            
         lay.addWidget(self.__pauseResumeBtn)
         lay.addSpacerItem(QSpacerItem(10, 10, QSizePolicy.MinimumExpanding))
         lay.addWidget(self.__stopBtn)
         lay.setContentsMargins(0, 0, 0, 0)
+            
 
         bottomWidget = QWidget()
-        bottomWidget.setLayout(lay)
-
+        if self.show_buttons:
+            bottomWidget.setLayout(lay)
+        
         lay = QVBoxLayout()
         lay.addWidget(self.__logBrowser)
+        
         lay.addWidget(bottomWidget)
 
         self.setLayout(lay)
@@ -156,6 +161,9 @@ class LogWidget(QWidget):
     def getStopText(self):
         return self.__stopText
 
+    def setScrollBarVisible(self, visible: bool):
+        self.__logBrowser.setVerticalScrollBarPolicy(Qt.ScrollBarAlwaysOn if visible else Qt.ScrollBarAlwaysOff)
+
     def __handleButton(self):
         self.__tDeleted = self.__t.isFinished()
         self.__pauseResumeBtn.setDisabled(self.__tDeleted)
@@ -195,13 +203,18 @@ class LogWidget(QWidget):
             e.accept()
 
 class LogDialog(QDialog):
-    def __init__(self):
+    def __init__(self, show_buttons = True, minimizeable=True):
         super().__init__()
+        self.minimizeable = minimizeable
+        self.show_buttons = show_buttons
         self.__initUi()
 
-    def __initUi(self):
-        self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
-        self.__logWidget = LogWidget(self)
+    def __initUi(self, minimizeable=True):
+        self.setWindowFlags(Qt.WindowCloseButtonHint)
+        if self.minimizeable:
+            self.setWindowFlags(Qt.WindowMinimizeButtonHint | Qt.WindowCloseButtonHint)
+            
+        self.__logWidget = LogWidget(self, show_buttons=self.show_buttons)
         lay = QGridLayout()
         lay.addWidget(self.__logWidget)
         self.setLayout(lay)
