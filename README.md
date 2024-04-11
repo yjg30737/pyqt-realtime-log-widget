@@ -15,18 +15,26 @@ If you want to test or modify this, clone it.
 It has test code already so you can just run the logWidget.py.
 
 ## Class/Method Overview
-* `LogWidget(parent=None)`
-    * `setCommand(command: str)` - set the command that you want to see the log in real time.
-    * `started` - signal emitted after command being started.
-    * `updated(str)` - signal emitted after log being updated. updated line as an argument.
-    * `stopped` - signal emitted after log being stopped.
-    * `finished` - signal emitted after command being finished
-    * `setStartText(start_text: str)` - set the text you want to add when process begins to execute
-    * `setStopText(stop_text: str)` - set the text you want to add when process being stopped
-    * `setFinishText(finish_text: str)` - text when process being finished
-    * `getStartText`, `getStopText`, `getFinishText` are also provided.
-* `LogDialog()` - Simply put, dialog version of LogWidget. Currently under development, just use `LogWidget`.
-    * `getLogWidget()` - I believe this is self-explanatory.
+* `LogWidget(parent=None, warn_before_close=True, show_buttons=True)`
+   * parameters
+      * `warn_before_close` - Show warning dialog before closing.
+      * `show_buttons` - Show pause and stop buttons at the bottom of the screen.
+   * function
+       * `setCommand(command: str)` - set the command that you want to see the log in real time.
+       * `started` - signal emitted after command being started.
+       * `updated(str)` - signal emitted after log being updated. updated line as an argument.
+       * `stopped` - signal emitted after log being stopped.
+       * `finished` - signal emitted after command being finished
+       * `setStartText(start_text: str)` - set the text you want to add when process begins to execute
+       * `setStopText(stop_text: str)` - set the text you want to add when process being stopped
+       * `setFinishText(finish_text: str)` - text when process being finished
+       * `getStartText`, `getStopText`, `getFinishText` are also provided.
+* `LogDialog(show_buttons=True, minimizeable=True)` - Simply put, dialog version of LogWidget.
+   * parameters
+      * `show_buttons` - Same as `LogWidget`'s.
+      * `minimizeable` - Make it able to be minimized or not  
+   * function 
+      * `getLogWidget()` - I believe this is self-explanatory.
 ## Feature
 * You can pause/resume/stop the command
 * Vertical scroll bar always at the bottom while log is displaying
